@@ -15,6 +15,8 @@ namespace Vending_Machine_PJ
             this.price = price;
         }
 
+        
+
         //drink it method
         public void Drinkit()
         {

@@ -8,8 +8,12 @@ namespace Vending_Machine_PJ
 {
     public class Vendingmachine
     {
-        //make into list
+        //make into list array
         //drinks
+
+
+        List<Product> drinks = new List<Product>();
+
         Drinks coke = new Drinks("Coca-cola", 12);
         Drinks fanta = new Drinks("Fanta", 12);
         Drinks water = new Drinks("Water", 15);
@@ -105,7 +109,7 @@ namespace Vending_Machine_PJ
                 switch (choice)//possible improvement make the calcuations into a generic method
                 {
                     case '1':
-                        Money.price = coke.price;
+                        Money.price = coke.price;//somehow make it so money.price = becomes a generic method, overload possibly?
                         Money.kronorpool = Sub(Money.kronorpool, coke.price);
                         if(Product.Consume == true)
                         {
@@ -117,6 +121,7 @@ namespace Vending_Machine_PJ
                     case '2':
                         Money.price = fanta.price;
                         Money.kronorpool = Sub(Money.kronorpool, fanta.price);
+                        Product.Useit();
                     break;
 
                     case '3':
