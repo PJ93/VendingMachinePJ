@@ -8,7 +8,7 @@ namespace Vending_Machine_PJ
 {
     public class Vendingmachine
     {
-
+        //make into list
         //drinks
         Drinks coke = new Drinks("Coca-cola", 12);
         Drinks fanta = new Drinks("Fanta", 12);
