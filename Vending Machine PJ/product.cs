@@ -9,54 +9,61 @@ namespace Vending_Machine_PJ
 
     public class Product
     {
-        public string name { get; set; }
-        public int price { get; set; }
+        public string name;
+        public int price;
+        public int itemnum;
         public bool Consume = false;
 
-        public Product(string name, int price)
+        public Product(int itemnum, string name, int price)
         {
+            this.itemnum = itemnum;
             this.name = name;
             this.price = price;
         }
         public override string ToString() //fixed names not showing up.
         {
-            return $"{name}:\t{price}kr";
+            return $"{itemnum} {name}: \t{price}kr";
         }
 
-        //make generic use method here
-        //gonna overload it when  specific products gets bought
         public virtual void Useit()
         {
-            Console.WriteLine("Do you wanna 'drink' the " + name + "?");
+            Console.WriteLine($"you a bought {name}");
+            Console.WriteLine("Do you wanna consume the " + name + "?");
 
             bool choice = true;
             while (choice)
             {
                 Console.WriteLine("Y/N");
-                char Y = Console.ReadKey(true).KeyChar;
+                char Y = Console.ReadKey().KeyChar;
                 switch (Y)
                 {
                     case 'Y':
                     case 'y':
                         Console.WriteLine("you use the " + name);
-                        choice = false;
+                        Console.ReadKey();
+                        Console.ReadKey();
                         this.Consume = false;
+                        choice = false;
                         break;
                     case 'N':
                     case 'n':
                         Console.WriteLine("You decide to save the " + name + " for a later time.");
-                        choice = false;
+                        Console.ReadKey();
                         this.Consume = false;
+                        choice = false;
                         break;
                     default:
                         Console.WriteLine("Only use Y or N");
+                        Console.ReadKey();
                         break;
                 }//switch
-
+                Console.ReadKey();
 
             }//while(choice)
-
+            Console.ReadKey();
         }//use it
+        
+
     }//class
 }//namespace
 

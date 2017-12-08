@@ -12,11 +12,11 @@ namespace Vending_Machine_PJ
         bool buying = false;
 
         int krona = Money.kronorpool;
+
         //method buying //possibly move to money class
         int Sub( int krona, int price)
         {
             int res = krona - price;
-
             
             //kronorpool = res;              
             if (res < 0)
@@ -28,7 +28,6 @@ namespace Vending_Machine_PJ
             {
                 Money.kronorpool = res;
             }
-            //return res;
             return Money.kronorpool;
         }//sub
 
@@ -37,22 +36,26 @@ namespace Vending_Machine_PJ
 
             int peng = 0;
 
-
-            Product cola = new Drinks("Coca-cola", 12);
-            Product fanta = new Drinks("Fanta", 12);
-            Product sandwichcheese = new Food("Cheese Sandvich", 30);
-            Product choco = new Snacks("Chocolade", 20);
+            //products
+            Product cola = new Drinks(1, "Coca-cola", 12);
+            Product fanta = new Drinks(2, "Fanta", 12);
+            Product water = new Drinks(3, "water", 15);
+            Product choco = new Snacks(4, "Chocolade", 20);
+            Product sandwichcheese = new Food(5, "Cheese Sandvich", 30);
 
             List<Product> items = new List<Product>
             {
+                cola, //basically filler for number 0
                 cola,
                 fanta,
-                sandwichcheese,
-                choco
+                water,
+                choco,
+                sandwichcheese
+                
             };
 
 
-            while (true)
+            while (true)//can possibly move to the money class
             {
                 bool test = true;
                 Console.Write("Insert money: ");
@@ -82,76 +85,50 @@ namespace Vending_Machine_PJ
             while (buying)
             {
 
-
-
                 Console.WriteLine("Amount of money to spend: " + Money.kronorpool);
 
                 Console.WriteLine("What do you wanna buy?");
 
-                for (int i = 0; i < items.Count; i++)
+                for (int i = 1; i < items.Count; i++)
                 {
-                    //items[i].ToString();
-                    Console.WriteLine($"{i}: {items[i]}");
+                    Console.WriteLine($"{items[i]}");
+                    
                 }
 
                 //end it
                 Console.WriteLine("0 END");
 
-                char choice = Console.ReadKey(true).KeyChar;
-                    
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice)//possible improvement make the calcuations into a generic method
+                if(choice < 0)
+                    {
+                    Console.WriteLine("Not a valid number");
+                    break;
+                }
+                if (choice == 0)
                 {
-                    case '1':
-                        Money.price = cola.price;//somehow make it so money.price = becomes a generic method, overload possibly?
-                        Money.kronorpool = Sub(Money.kronorpool, cola.price);
-                        if(cola.Consume == false)
-                        {
-                            cola.Useit();
-                        }
-                        
-                    break;
+                    buying = false;
+                }
 
-                    case '2':
-                        Money.price = fanta.price;
-                        Money.kronorpool = Sub(Money.kronorpool, fanta.price);
-                        //Product.Useit();
-                    break;
+                if (choice > 0)
+                    foreach (var product in items)
+                {
+                    if (choice == product.itemnum )
+                    {
+                        Money.kronorpool = Sub(Money.kronorpool, product.price);
+                        product.Useit();
+                        Console.ReadKey();
 
-                    case '3':
-                        Money.price = water.price;
-                        Money.kronorpool = Sub(Money.kronorpool, Money.price);
-                    break;
-                    case '4':
-                        Money.price = choco.price;
-                        Money.kronorpool = Sub(Money.kronorpool, Money.price);
-                        if (choco.Consume == false)
-                            choco.Useit();
-                    break;
+                        break;
+                    }
+                }
+                else if (choice > items.Count)
+                {
+                    Console.WriteLine("Sorry no product with that item number");
+                }
 
-                    case '5':
-                        Money.price = sandwichcheese.price;
-                        Money.kronorpool = Sub(Money.kronorpool, Money.price);
-                        if (sandwichcheese.Consume == false)
-                            sandwichcheese.Useit();
-                    break;
+                //Console.Clear();
 
-                    case '0':                            
-                        buying = false;
-                    break;
-                    //case '+':
-                    //    Console.WriteLine("How much do you wanna add?");
-                    //    int add = Convert.ToInt32(Console.ReadLine());
-
-                    //    kronorpool = kronorpool + add;
-                            
-                    //break;
-
-                    default:
-                        Console.WriteLine("Only use the numbers");
-                    break;
-
-                }//choice
             }//buying
             Money.Seperatemoney(); 
 

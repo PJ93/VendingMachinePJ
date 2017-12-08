@@ -9,16 +9,18 @@ namespace Vending_Machine_PJ
     class Food : Product
     {
 
-        public Food(string name, int price)//made this public, but the base name ect are still private
-            : base(name, price)
+        public Food(int itemnum, string name, int price)//made this public, but the base name ect are still private
+            : base(itemnum, name, price)
         {
             this.name = name;
             this.price = price;
+            this.Consume = false;
         }
 
 
         public override void Useit()
         {
+            Console.WriteLine($"you a bought {name}");
             Console.WriteLine("Do you wanna eat the " + name + "?");
 
             bool eatchoice = true;

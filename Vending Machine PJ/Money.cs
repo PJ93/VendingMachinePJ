@@ -21,7 +21,9 @@ namespace Vending_Machine_PJ
                 kronorpool -= antal * val; //-= short for pool = pool -
                 if (antal > 0)
                 {
-                    Console.WriteLine("you get back {1} stycken {0}-kronor", val, antal);
+                    Console.WriteLine("You get back:");
+                    Console.WriteLine("{1} x {0}kr", val, antal);
+                    Console.WriteLine("A total of" + kronorpool);
                 }
             }
         }//sepmoney
