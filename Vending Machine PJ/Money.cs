@@ -23,9 +23,10 @@ namespace Vending_Machine_PJ
                 {
                     Console.WriteLine("You get back:");
                     Console.WriteLine("{1} x {0}kr", val, antal);
-                    Console.WriteLine("A total of" + kronorpool);
+                   
                 }
             }
+            Console.WriteLine("A total of " + kronorpool);
         }//sepmoney
 
     }//class

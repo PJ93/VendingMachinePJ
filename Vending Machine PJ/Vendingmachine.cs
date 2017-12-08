@@ -9,7 +9,8 @@ namespace Vending_Machine_PJ
     public class Vendingmachine
     {
         //loops
-        bool buying = false;
+        bool buying = false; //despite visual studio thinking this is not used it is.
+        bool use = true;
 
         int krona = Money.kronorpool;
 
@@ -23,6 +24,7 @@ namespace Vending_Machine_PJ
             {
                 Console.WriteLine("Not enough money, purchase failed.");
                 buying = false;
+                use = false;
             }
             else
             {
@@ -42,18 +44,24 @@ namespace Vending_Machine_PJ
             Product water = new Drinks(3, "water", 15);
             Product choco = new Snacks(4, "Chocolade", 20);
             Product sandwichcheese = new Food(5, "Cheese Sandvich", 30);
+            Product banana = new Food(6, "Banana", 5);
+            Product pastasallad = new Food(7, "Pasta Sallad", 55);
 
             List<Product> items = new List<Product>
             {
-                cola, //basically filler for number 0
                 cola,
                 fanta,
                 water,
                 choco,
-                sandwichcheese
+                sandwichcheese,
+                banana,
+                pastasallad
+
                 
             };
 
+
+            }
 
             while (true)//can possibly move to the money class
             {
@@ -81,48 +89,66 @@ namespace Vending_Machine_PJ
             }//money check
             Money.kronorpool = Money.kronorpool + peng;
 
+
+
+
             bool buying = true;
             while (buying)
             {
-
+                
                 Console.WriteLine("Amount of money to spend: " + Money.kronorpool);
 
                 Console.WriteLine("What do you wanna buy?");
 
-                for (int i = 1; i < items.Count; i++)
+                for (int i = 0; i < items.Count; i++)
                 {
                     Console.WriteLine($"{items[i]}");
                     
                 }
 
                 //end it
+                //int choiceout = 
+
                 Console.WriteLine("0 END");
-
-                int choice = Convert.ToInt32(Console.ReadLine());
-
-                if(choice < 0)
+                bool test2 = true;
+                string choicein = Console.ReadLine();
+                int choiceout = 0;
+                try
+                {
+                    
+                    test2 = int.TryParse(choicein, out choiceout);
+                }
+                catch
+                {
+                    //catch must still be here or visual studio complains
+                }
+                if (test2) break;
+                if (choiceout < 0)
                     {
                     Console.WriteLine("Not a valid number");
                     break;
                 }
-                if (choice == 0)
+                if (choiceout == 0)
                 {
                     buying = false;
                 }
 
-                if (choice > 0)
+                if (choiceout > 0)
                     foreach (var product in items)
                 {
-                    if (choice == product.itemnum )
+                    if (choiceout == product.itemnum )
                     {
                         Money.kronorpool = Sub(Money.kronorpool, product.price);
-                        product.Useit();
+                            if (use = false)
+                            {
+                                product.Useit();
+                            }
                         Console.ReadKey();
 
                         break;
                     }
                 }
-                else if (choice > items.Count)
+                else if (choiceout > items.Count)
                 {
                     Console.WriteLine("Sorry no product with that item number");
                 }
