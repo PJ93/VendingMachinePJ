@@ -14,24 +14,7 @@ namespace Vending_Machine_PJ
 
         int krona = Money.kronorpool;
 
-        //method buying //possibly move to money class
-        int Sub( int krona, int price)
-        {
-            int res = krona - price;
-            
-            //kronorpool = res;              
-            if (res < 0)
-            {
-                Console.WriteLine("Not enough money, purchase failed.");
-                buying = false;
-                use = false;
-            }
-            else
-            {
-                Money.kronorpool = res;
-            }
-            return Money.kronorpool;
-        }//sub
+
 
         public void Vending()
         {
@@ -55,104 +38,145 @@ namespace Vending_Machine_PJ
                 choco,
                 sandwichcheese,
                 banana,
-                pastasallad
-
-                
+                pastasallad  
             };
 
-            while (true)//can possibly move to the money class
+            //method buying //possibly move to money class
+            int Sub(int krona, int price)
             {
-                bool test = true;
-                Console.Write("Insert money: ");
-                string inputcoin = Console.ReadLine();
-                try
+                int res = krona - price;
+
+                //kronorpool = res;              
+                if (res < 0)
                 {
-                    test = int.TryParse(inputcoin, out peng);
-                }
-                catch
-                {
-                    //catch must still be here or visual studio complains
-                }
-
-                bool acceptable = false;
-                for (int i = 0; i < Money.kronor.Length; i++)
-                {
-                    if (peng == Money.kronor[i]) acceptable = true;
-                    if (acceptable) break;//if it hits the same number it stops and doesn't continue going thru the array
-                }
-
-                if (test && acceptable) break; //easier way of making a loop until condition is met
-                else Console.WriteLine("Error");
-            }//money check
-            Money.kronorpool = Money.kronorpool + peng;
-
-
-
-
-            bool buying = true;
-            while (buying)
-            {
-                
-                Console.WriteLine("Amount of money to spend: " + Money.kronorpool);
-
-                Console.WriteLine("What do you wanna buy?");
-
-                for (int i = 0; i < items.Count; i++)
-                {
-                    Console.WriteLine($"{items[i]}");
-                    
-                }
-
-                //end it
-                //int choiceout = 
-
-                Console.WriteLine("0 END");
-                bool test2 = true;
-                string choicein = Console.ReadLine();
-                int choiceout = 0;
-                try
-                {
-                    
-                    test2 = int.TryParse(choicein, out choiceout);
-                }
-                catch
-                {
-                    //catch must still be here or visual studio complains
-                }
-                if (test2) break;
-                if (choiceout < 0)
-                    {
-                    Console.WriteLine("Not a valid number");
-                    break;
-                }
-                if (choiceout == 0)
-                {
+                    Console.WriteLine("Not enough money, purchase failed.");
                     buying = false;
+                    use = true;
                 }
-
-                if (choiceout > 0)
-                    foreach (var product in items)
+                else
                 {
-                    if (choiceout == product.itemnum )
-                    {
-                        Money.kronorpool = Sub(Money.kronorpool, product.price);
-                            if (use = false)
+                    Money.kronorpool = res;
+                    use = false;
+                }
+                return Money.kronorpool;
+            }//sub
+
+            bool mainmenu = true;
+            while (mainmenu)
+            {
+                Console.WriteLine("1: Buy");
+                Console.WriteLine("2: Insert money");
+                Console.WriteLine("3: End and collect change.");
+                Console.WriteLine($"Money to spend: {Money.kronorpool}");
+
+                char menuchoice = Console.ReadKey(true).KeyChar;
+                switch (menuchoice)
+                {
+                    case '1':
+                        bool buying = true;
+                        while (buying)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Amount of money to spend: " + Money.kronorpool);
+
+                            Console.WriteLine("What do you wanna buy?");
+
+                            for (int i = 0; i < items.Count; i++)
                             {
-                                product.Useit();
+                                Console.WriteLine($"{items[i]}");
+
                             }
-                        Console.ReadKey();
+
+                            Console.WriteLine("0 BACK TO MAINMENU");
+                            bool test2 = true;
+                            string choicein = Console.ReadLine();
+                            int choiceout = 0;
+                            try
+                            {
+
+                                test2 = int.TryParse(choicein, out choiceout);
+                            }
+                            catch
+                            {
+                                //catch must still be here or visual studio complains
+                            }
+                            if (test2)
+                            if (choiceout < 0)
+                            {
+                                Console.WriteLine("Not a valid number");
+                                break;
+                            }
+
+                            if (choiceout > 0)
+                                foreach (var product in items)
+                                {
+                                    if (choiceout == product.itemnum)
+                                    {
+                                        Money.kronorpool = Sub(Money.kronorpool, product.price); 
+
+                                        if(use == false)
+                                        {
+                                            product.Useit();
+                                        }
+
+                                        Console.ReadKey();
+
+                                        
+                                    }
+                                }
+                            else if (choiceout > items.Count)
+                            {
+                                Console.WriteLine("Sorry no product with that item number");
+                            }
+                            if (choiceout == 0)
+                            {
+                                buying = false;
+                            }
+
+                            //Console.Clear();
+
+                        }//buying
 
                         break;
-                    }
-                }
-                else if (choiceout > items.Count)
-                {
-                    Console.WriteLine("Sorry no product with that item number");
-                }
 
-                //Console.Clear();
+                    case '2':
+                        while (true)//can possibly move to the money class
+                        {
+                            bool test = true;
+                            Console.Write("Insert money: ");
+                            string inputcoin = Console.ReadLine();
+                            try
+                            {
+                                test = int.TryParse(inputcoin, out peng);
+                            }
+                            catch
+                            {
+                                //catch must still be here or visual studio complains
+                            }
 
-            }//buying
+                            bool acceptable = false;
+                            for (int i = 0; i < Money.kronor.Length; i++)
+                            {
+                                if (peng == Money.kronor[i]) acceptable = true;
+                                if (acceptable) break;//if it hits the same number it stops and doesn't continue going thru the array
+                            }
+
+                            if (test && acceptable) break; //easier way of making a loop until condition is met
+                            else Console.WriteLine("Error");
+                        }//money check
+                        Money.kronorpool = Money.kronorpool + peng;
+
+                        break;
+
+                    case '3':
+                        mainmenu = false;
+
+                        break;
+                }//switchmainmenu
+                Console.Clear();
+
+            }//whilemainmenu
+
             Money.Seperatemoney(); 
 
             Console.ReadKey(true);
