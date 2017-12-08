@@ -60,9 +60,6 @@ namespace Vending_Machine_PJ
                 
             };
 
-
-            }
-
             while (true)//can possibly move to the money class
             {
                 bool test = true;
