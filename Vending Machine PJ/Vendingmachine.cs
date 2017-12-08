@@ -11,8 +11,11 @@ namespace Vending_Machine_PJ
         //make into list array
         //drinks
 
+        //Product cola = new Drinks("Coca-cola", 12);
 
-        List<Product> drinks = new List<Product>();
+        //List<Product> items = new List<Product>();
+        
+
 
         Drinks coke = new Drinks("Coca-cola", 12);
         Drinks fanta = new Drinks("Fanta", 12);
@@ -44,19 +47,23 @@ namespace Vending_Machine_PJ
             else
             {
                 Money.kronorpool = res;
-                Product.Consume = true;
             }
             //return res;
             return Money.kronorpool;
-        }
+        }//sub
 
-
-
-        
         public void Vending()
         {
 
             int peng = 0;
+
+
+            Product cola = new Drinks("Coca-cola", 12);
+
+            List<Product> items = new List<Product>();
+            items.Add(cola);
+
+
             while (true)
             {
                 bool test = true;
@@ -111,9 +118,9 @@ namespace Vending_Machine_PJ
                     case '1':
                         Money.price = coke.price;//somehow make it so money.price = becomes a generic method, overload possibly?
                         Money.kronorpool = Sub(Money.kronorpool, coke.price);
-                        if(Product.Consume == true)
+                        if(coke.Consume == false)
                         {
-                            coke.Drinkit();
+                            coke.Useit();
                         }
                         
                     break;
@@ -121,7 +128,7 @@ namespace Vending_Machine_PJ
                     case '2':
                         Money.price = fanta.price;
                         Money.kronorpool = Sub(Money.kronorpool, fanta.price);
-                        Product.Useit();
+                        //Product.Useit();
                     break;
 
                     case '3':
@@ -131,14 +138,14 @@ namespace Vending_Machine_PJ
                     case '4':
                         Money.price = Choco.price;
                         Money.kronorpool = Sub(Money.kronorpool, Money.price);
-                        if (Product.Consume == true)
+                        if (Choco.Consume == true)
                             Choco.Eatit();
                     break;
 
                     case '5':
                         Money.price = sandvich.price;
                         Money.kronorpool = Sub(Money.kronorpool, Money.price);
-                        if (Product.Consume == true)
+                        if (sandvich.Consume == true)
                             sandvich.Eatit();
                     break;
 
@@ -160,7 +167,6 @@ namespace Vending_Machine_PJ
                 }//choice
             }//buying
             Money.Seperatemoney(); 
-            //Console.WriteLine("You get back a total of " + Money.kronorpool + "kr");
 
             Console.ReadKey(true);
 

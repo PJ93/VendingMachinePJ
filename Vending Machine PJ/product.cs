@@ -11,12 +11,11 @@ namespace Vending_Machine_PJ
     {
         public string name { get; set; }
         public int price { get; set; }
-        public int stuff { get; set; }
-        public static bool Consume = false;
+        public bool Consume = false;
 
         //make generic use method here
         //gonna overload it when  specific products gets bought
-        public static void Useit()
+        public virtual void Useit()
         {
             Console.WriteLine("Do you wanna 'drink' the " + name + "?");
 
@@ -29,15 +28,15 @@ namespace Vending_Machine_PJ
                 {
                     case 'Y':
                     case 'y':
-                        Console.WriteLine("you 'drink' the " + name + ", it tastes a bit funny but you feel refreshed.");
+                        Console.WriteLine("you use the " + name);
                         choice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     case 'N':
                     case 'n':
                         Console.WriteLine("You decide to save the " + name + " for a later time.");
                         choice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     default:
                         Console.WriteLine("Only use Y or N");

@@ -33,13 +33,13 @@ namespace Vending_Machine_PJ
                     case 'y':
                         Console.WriteLine("you eat the " + name + ", it tastes a bit funny...");
                         eatchoice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     case 'N':
                     case 'n':
                         Console.WriteLine("You decide to save the " + name + " for a later time.");
                         eatchoice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     default:
                         Console.WriteLine("Only use Y or N");

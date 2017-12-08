@@ -13,12 +13,13 @@ namespace Vending_Machine_PJ
         {
             this.name = name;
             this.price = price;
+            this.Consume = false;
         }
 
         
 
         //drink it method
-        public void Drinkit()
+        public override void Useit()
         {
             Console.WriteLine("Do you wanna drink the "+ name+"?");
 
@@ -33,13 +34,13 @@ namespace Vending_Machine_PJ
                     case 'y':
                         Console.WriteLine("you drink the " + name + ", it tastes a bit funny but you feel refreshed.");
                         drinkchoice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     case 'N':
                     case 'n':
                         Console.WriteLine("You decide to save the " + name + " for a later time.");
                         drinkchoice = false;
-                        Product.Consume = false;
+                        this.Consume = false;
                         break;
                     default:
                         Console.WriteLine("Only use Y or N");
