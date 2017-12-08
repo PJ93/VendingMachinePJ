@@ -6,22 +6,20 @@ using System.Threading.Tasks;
 
 namespace Vending_Machine_PJ
 {
-    class Drinks : Product
+    public class Drinks : Product
     {
         
         public Drinks(string name, int price)//made this public, but the base name ect are still private
+            :base(name, price)
         {
-            this.name = name;
-            this.price = price;
+            //this.name = name;
+            //this.price = price;
             this.Consume = false;
         }
 
-        
-
-        //drink it method
         public override void Useit()
         {
-            Console.WriteLine("Do you wanna drink the "+ name+"?");
+            Console.WriteLine("Do you wanna drink the "+ name +"?");
 
             bool drinkchoice = true;
             while (drinkchoice)

@@ -13,6 +13,16 @@ namespace Vending_Machine_PJ
         public int price { get; set; }
         public bool Consume = false;
 
+        public Product(string name, int price)
+        {
+            this.name = name;
+            this.price = price;
+        }
+        public override string ToString() //fixed names not showing up.
+        {
+            return $"{name}:\t{price}kr";
+        }
+
         //make generic use method here
         //gonna overload it when  specific products gets bought
         public virtual void Useit()

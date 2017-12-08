@@ -10,13 +10,14 @@ namespace Vending_Machine_PJ
     {
 
         public Food(string name, int price)//made this public, but the base name ect are still private
+            : base(name, price)
         {
             this.name = name;
             this.price = price;
         }
 
 
-        public void Eatit()
+        public override void Useit()
         {
             Console.WriteLine("Do you wanna eat the " + name + "?");
 
