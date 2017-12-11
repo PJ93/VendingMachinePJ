@@ -26,7 +26,6 @@ namespace Vending_Machine_PJ
                    
                 }
             }
-            Console.WriteLine("A total of " + kronorpool);
         }//sepmoney
 
     }//class
